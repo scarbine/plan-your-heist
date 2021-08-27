@@ -8,11 +8,14 @@ namespace plan_your_heist
     {
         public string Name {get; set;}
 
+        public int TeamPower {get; set;}
+
         public List<TeamMember> TeamMembers {get; set;}
 
         public Team(string name)
         {
             Name = name;
+            TeamPower = 0;
             TeamMembers = new List<TeamMember>();
         }
 

@@ -10,6 +10,7 @@ namespace plan_your_heist
             string teamName = "newTeam";
             int skillLevel = 0;
             double courageFactor = 0.0;
+            int BankDifficulty = 100;
 
             Console.WriteLine("Plan Your Heist!");
             Console.WriteLine("What is your team name?");
@@ -44,10 +45,20 @@ namespace plan_your_heist
 
             foreach (TeamMember member in UserTeam.TeamMembers)
             {
-                Console.WriteLine(member.Name, member.SkillLevel, member.CourageFactor);
+                UserTeam.TeamPower += member.SkillLevel;
+            }
+            Console.WriteLine($"There are {UserTeam.TeamMembers.Count} members on your team with a total skill level of {UserTeam.TeamPower}");
+            Console.WriteLine("And the hiest begins!");
+
+            if (UserTeam.TeamPower >= BankDifficulty)
+            {
+                Console.WriteLine("Success!!! Make it Rain!");
+            }
+            else
+            {
+                Console.WriteLine("You failed. Your powers are too weak for this bank!");
             }
 
-            Console.WriteLine("Are you ready to begin your hiest?");
 
 
 
