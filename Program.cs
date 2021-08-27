@@ -13,24 +13,20 @@ namespace plan_your_heist
             int BankDifficulty = 0;
             int BankLuck = new Random().Next(-11,11);
             int TrialRuns = 1;
+            int SuccessfulRuns = 0;
+            int FailedRuns = 0;
+            int BankLuckDifficulty = 0;
             Console.WriteLine("Plan Your Heist!");
             Console.WriteLine("How many trial runs would you like to make?");
             TrialRuns = int.Parse(Console.ReadLine());
             Console.WriteLine("Choose the banks diffiuclty. 1-100");
             BankDifficulty = int.Parse(Console.ReadLine());
-            int BankLuckDifficulty = BankDifficulty + BankLuck;
             Console.WriteLine("What is your team name?");
             teamName = Console.ReadLine();
             Team UserTeam = new Team(teamName);
 
-            for ( int i = 0; i < TrialRuns ; i++)
-            {
-            Game();
-            }
 
 
-            void Game()
-            {
             while (true)
             {
                 name = "";
@@ -57,6 +53,18 @@ namespace plan_your_heist
                 Console.WriteLine($"Courage Factor: {NewMember.CourageFactor}");
             }
 
+            for ( int i = 0; i < TrialRuns ; i++)
+            {
+                BankLuck = new Random().Next(-11,11);
+                BankLuckDifficulty = BankLuck + BankDifficulty;
+                UserTeam.TeamPower =0;
+                Game();
+           
+            }
+
+            void Game()
+            {
+
             foreach (TeamMember member in UserTeam.TeamMembers)
             {
                 UserTeam.TeamPower += member.SkillLevel;
@@ -69,12 +77,17 @@ namespace plan_your_heist
             if (UserTeam.TeamPower >= BankLuckDifficulty)
             {
                 Console.WriteLine("Success!!! Make it Rain!");
+                SuccessfulRuns++;
             }
             else
             {
                 Console.WriteLine("You failed. Your powers are too weak for this bank!");
+                FailedRuns--;
             }
-            }
+            } 
+
+            Console.WriteLine($"You had {SuccessfulRuns} Successful Runs");
+            Console.WriteLine($"You had {FailedRuns} Failed Runs");
 
 
 
