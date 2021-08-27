@@ -11,6 +11,8 @@ namespace plan_your_heist
             int skillLevel = 0;
             double courageFactor = 0.0;
             int BankDifficulty = 100;
+            int BankLuck = new Random().Next(-11,11);
+            int BankLuckDifficulty = BankDifficulty + BankLuck;
 
             Console.WriteLine("Plan Your Heist!");
             Console.WriteLine("What is your team name?");
@@ -49,6 +51,8 @@ namespace plan_your_heist
             }
             Console.WriteLine($"There are {UserTeam.TeamMembers.Count} members on your team with a total skill level of {UserTeam.TeamPower}");
             Console.WriteLine("And the hiest begins!");
+            Console.WriteLine($"The teams total power is: {UserTeam.TeamPower}");
+            Console.WriteLine($"The Banks breach strength is: {BankLuckDifficulty}");
 
             if (UserTeam.TeamPower >= BankDifficulty)
             {
