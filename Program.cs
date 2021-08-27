@@ -10,15 +10,27 @@ namespace plan_your_heist
             string teamName = "newTeam";
             int skillLevel = 0;
             double courageFactor = 0.0;
-            int BankDifficulty = 100;
+            int BankDifficulty = 0;
             int BankLuck = new Random().Next(-11,11);
-            int BankLuckDifficulty = BankDifficulty + BankLuck;
-
+            int TrialRuns = 1;
             Console.WriteLine("Plan Your Heist!");
+            Console.WriteLine("How many trial runs would you like to make?");
+            TrialRuns = int.Parse(Console.ReadLine());
+            Console.WriteLine("Choose the banks diffiuclty. 1-100");
+            BankDifficulty = int.Parse(Console.ReadLine());
+            int BankLuckDifficulty = BankDifficulty + BankLuck;
             Console.WriteLine("What is your team name?");
             teamName = Console.ReadLine();
             Team UserTeam = new Team(teamName);
 
+            for ( int i = 0; i < TrialRuns ; i++)
+            {
+            Game();
+            }
+
+
+            void Game()
+            {
             while (true)
             {
                 name = "";
@@ -54,13 +66,14 @@ namespace plan_your_heist
             Console.WriteLine($"The teams total power is: {UserTeam.TeamPower}");
             Console.WriteLine($"The Banks breach strength is: {BankLuckDifficulty}");
 
-            if (UserTeam.TeamPower >= BankDifficulty)
+            if (UserTeam.TeamPower >= BankLuckDifficulty)
             {
                 Console.WriteLine("Success!!! Make it Rain!");
             }
             else
             {
                 Console.WriteLine("You failed. Your powers are too weak for this bank!");
+            }
             }
 
 
